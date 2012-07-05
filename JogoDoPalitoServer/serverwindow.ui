@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>287</width>
+    <width>282</width>
     <height>356</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>ServerWindow</string>
+   <string>Servidor Jogo do Palito</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QLabel" name="label">
@@ -92,7 +92,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>287</width>
+     <width>282</width>
      <height>21</height>
     </rect>
    </property>
