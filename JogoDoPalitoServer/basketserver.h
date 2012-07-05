@@ -23,7 +23,6 @@ private slots:
     sendPlayersResult();
     getPlayerMove();
 
-
 };
 
 #endif // BASKETSERVER_H
