@@ -12,3 +12,4 @@ ServerWindow::~ServerWindow()
 {
     delete ui;
 }
+

@@ -12,9 +12,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         serverwindow.cpp \
-    player.cpp
+    player.cpp \
+    basketserver.cpp
 
 HEADERS  += serverwindow.h \
-    player.h
+    player.h \
+    basketserver.h
 
 FORMS    += serverwindow.ui
