@@ -6,6 +6,8 @@ ServerWindow::ServerWindow(QWidget *parent) :
     ui(new Ui::ServerWindow)
 {
     ui->setupUi(this);
+    connect(&basketServer, SIGNAL(sendLog(QString)),
+     this, SLOT(displayLog(QString)));
 }
 
 ServerWindow::~ServerWindow()
@@ -16,9 +18,13 @@ ServerWindow::~ServerWindow()
 
 void ServerWindow::on_startButton_clicked()
 {
-    basketServer.setUpServer();
+    basketServer.setUpServer(ui->playersSpinBox->value());
 
     ui->ipLabel->setText("Ip:"+basketServer.ipAddress);
     ui->portLabel->setText("Port:"+ QString::number(basketServer.port));
+}
+void ServerWindow::displayLog(QString log)
+{
+    ui->LogEdit->append(log);
 }
 

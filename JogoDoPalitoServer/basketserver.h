@@ -1,12 +1,18 @@
 #ifndef BASKETSERVER_H
 #define BASKETSERVER_H
+#define separator ","
+#define moveConst "<move>"
+#define indexConst "<index>"
+#define playersConst "<players>"
 
 #include <QTcpServer>
 #include <QList>
 #include <QNetworkInterface>
 #include <player.h>
+#include<QString>
 
-class BasketServer : QObject
+
+class BasketServer :public QObject
 {
     Q_OBJECT
 public:
@@ -19,11 +25,12 @@ public:
     QList<Player*> playersList;
     QString  ipAddress;
     int port;
-
-    void setUpServer(); //start listening to ports
+    void sendMessage(QString message, QTcpSocket* tcpSocket);
+    void setUpServer(int nPlayers); //start listening to ports
     void startGame(); //invoked when all players are connected
 signals:
     void allPlayersReady();
+    void sendLog(QString log);
 
 private slots:
     void sendPlayersResult();

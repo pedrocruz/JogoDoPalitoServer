@@ -16,6 +16,8 @@ class ServerWindow : public QMainWindow
 public:
     explicit ServerWindow(QWidget *parent = 0);    
     ~ServerWindow();
+public slots:
+    void displayLog(QString log);
 
 private:
     Ui::ServerWindow *ui;

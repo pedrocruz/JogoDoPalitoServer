@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'serverwindow.ui'
 **
-** Created: Thu 5. Jul 17:34:44 2012
-**      by: Qt User Interface Compiler version 4.7.0
+** Created: Thu 5. Jul 19:28:14 2012
+**      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -14,6 +14,7 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
+#include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
 #include <QtGui/QMainWindow>
@@ -21,8 +22,9 @@
 #include <QtGui/QPushButton>
 #include <QtGui/QSpinBox>
 #include <QtGui/QStatusBar>
-#include <QtGui/QTableView>
+#include <QtGui/QTextEdit>
 #include <QtGui/QToolBar>
+#include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -31,12 +33,15 @@ class Ui_ServerWindow
 {
 public:
     QWidget *centralWidget;
+    QHBoxLayout *horizontalLayout_2;
+    QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout;
     QLabel *label;
     QSpinBox *playersSpinBox;
     QPushButton *startButton;
-    QTableView *gameTableView;
     QLabel *ipLabel;
     QLabel *portLabel;
+    QTextEdit *LogEdit;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -45,33 +50,62 @@ public:
     {
         if (ServerWindow->objectName().isEmpty())
             ServerWindow->setObjectName(QString::fromUtf8("ServerWindow"));
-        ServerWindow->resize(282, 356);
+        ServerWindow->resize(281, 357);
         centralWidget = new QWidget(ServerWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
+        horizontalLayout_2 = new QHBoxLayout(centralWidget);
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setSpacing(6);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         label = new QLabel(centralWidget);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(10, 10, 101, 21));
+
+        horizontalLayout->addWidget(label);
+
         playersSpinBox = new QSpinBox(centralWidget);
         playersSpinBox->setObjectName(QString::fromUtf8("playersSpinBox"));
-        playersSpinBox->setGeometry(QRect(120, 10, 42, 22));
         playersSpinBox->setMinimum(1);
         playersSpinBox->setMaximum(4);
+
+        horizontalLayout->addWidget(playersSpinBox);
+
         startButton = new QPushButton(centralWidget);
         startButton->setObjectName(QString::fromUtf8("startButton"));
-        startButton->setGeometry(QRect(200, 10, 75, 23));
-        gameTableView = new QTableView(centralWidget);
-        gameTableView->setObjectName(QString::fromUtf8("gameTableView"));
-        gameTableView->setGeometry(QRect(10, 110, 261, 192));
+
+        horizontalLayout->addWidget(startButton);
+
+
+        verticalLayout->addLayout(horizontalLayout);
+
         ipLabel = new QLabel(centralWidget);
         ipLabel->setObjectName(QString::fromUtf8("ipLabel"));
-        ipLabel->setGeometry(QRect(10, 50, 271, 20));
+
+        verticalLayout->addWidget(ipLabel);
+
         portLabel = new QLabel(centralWidget);
         portLabel->setObjectName(QString::fromUtf8("portLabel"));
-        portLabel->setGeometry(QRect(10, 80, 271, 21));
+
+        verticalLayout->addWidget(portLabel);
+
+        LogEdit = new QTextEdit(centralWidget);
+        LogEdit->setObjectName(QString::fromUtf8("LogEdit"));
+        LogEdit->setReadOnly(true);
+
+        verticalLayout->addWidget(LogEdit);
+
+
+        horizontalLayout_2->addLayout(verticalLayout);
+
         ServerWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(ServerWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 282, 21));
+        menuBar->setGeometry(QRect(0, 0, 281, 21));
         ServerWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(ServerWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));

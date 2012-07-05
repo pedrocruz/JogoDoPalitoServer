@@ -5,7 +5,7 @@
 #include <QString>
 #include <QObject>
 
-class Player : QObject
+class Player : public QObject
 {
 Q_OBJECT
 public:
