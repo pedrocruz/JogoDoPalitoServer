@@ -14,14 +14,14 @@ public:
     QTcpServer server;
     QList<Player> playersList;
 
-    void setUpServer();
-    void startGame();
+    void setUpServer(); //start listening to ports
+    void startGame(); //invoked when all players are connected
 signals:
-    allPlayersReady();
+    void allPlayersReady();
 
 private slots:
-    sendPlayersResult();
-    getPlayerMove();
+    void sendPlayersResult();
+    void getPlayerMove();
 
 };
 
