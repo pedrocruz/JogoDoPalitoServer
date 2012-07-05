@@ -27,6 +27,7 @@ signals:
 
 private slots:
     sendPlayersResult();
+    getPlayerMove();
     
 private:
     Ui::ServerWindow *ui;

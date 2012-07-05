@@ -11,8 +11,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        serverwindow.cpp
+        serverwindow.cpp \
+    player.cpp
 
-HEADERS  += serverwindow.h
+HEADERS  += serverwindow.h \
+    player.h
 
 FORMS    += serverwindow.ui
