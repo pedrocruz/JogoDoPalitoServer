@@ -3,16 +3,22 @@
 
 #include <QTcpServer>
 #include <QList>
+#include <QNetworkInterface>
 #include <player.h>
 
-class BasketServer
+class BasketServer : QObject
 {
+    Q_OBJECT
 public:
     BasketServer();
+    ~BasketServer();
 
     int playersNumber;
+    int playersConnected;
     QTcpServer server;
-    QList<Player> playersList;
+    QList<Player*> playersList;
+    QString  ipAddress;
+    int port;
 
     void setUpServer(); //start listening to ports
     void startGame(); //invoked when all players are connected
@@ -21,7 +27,8 @@ signals:
 
 private slots:
     void sendPlayersResult();
-    void getPlayerMove();
+    void getPlayersMoves();
+    void acceptConnection();
 
 };
 

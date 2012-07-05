@@ -2,6 +2,7 @@
 #define SERVERWINDOW_H
 
 #include <QMainWindow>
+#include "basketserver.h"
 
 
 namespace Ui {
@@ -18,6 +19,10 @@ public:
 
 private:
     Ui::ServerWindow *ui;
+    BasketServer basketServer;
+
+private slots:
+    void on_startButton_clicked();
 };
 
 #endif // SERVERWINDOW_H

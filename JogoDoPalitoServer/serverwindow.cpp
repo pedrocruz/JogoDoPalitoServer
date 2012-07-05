@@ -13,3 +13,12 @@ ServerWindow::~ServerWindow()
     delete ui;
 }
 
+
+void ServerWindow::on_startButton_clicked()
+{
+    basketServer.setUpServer();
+
+    ui->ipLabel->setText("Ip:"+basketServer.ipAddress);
+    ui->portLabel->setText("Port:"+ QString::number(basketServer.port));
+}
+

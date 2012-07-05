@@ -3,3 +3,6 @@
 Player::Player()
 {
 }
+void Player::updateMoves()
+{
+}
