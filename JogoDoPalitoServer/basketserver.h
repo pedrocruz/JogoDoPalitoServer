@@ -23,6 +23,7 @@ public:
     int playersNumber;
     int nPlayersWithName;
     int playersConnected;
+    int numberOfGuesses;
     QTcpServer server;
     QList<Player*> playersList;
     QString  ipAddress;
@@ -37,7 +38,7 @@ signals:
 private slots:
     void getNameChosen(int index, QString name);
     void sendPlayersResult();
-    void getPlayersMoves();
+    void getGuess(int index);
     void acceptConnection();
 
 };

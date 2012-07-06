@@ -34,10 +34,10 @@ void Player::parseMessage(QString message)
     list = message.split(separator);
     if(message.contains(moveConst))
     {
+        hand=list.at(1).toInt();
+        guess=list.at(2).toInt();
+        emit guessMade(index);
 
-        //for(int i=0; i<list.size()/2; i++){
-            //hand = list.at(1+(i*2)).toInt();
-            //guess = list.at(2+(i*2)).toInt();
      }else if (message.contains(nameConst))
      {
         name=list.at(1);

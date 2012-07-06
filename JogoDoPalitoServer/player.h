@@ -26,6 +26,7 @@ public:
     void parseMessage(QString message);
 signals:
     void nameChosen(int index,QString name);
+    void guessMade(int index);
 public slots:
     void messageReceived();
 private slots:

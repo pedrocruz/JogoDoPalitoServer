@@ -14,6 +14,7 @@ void BasketServer::setUpServer(int nPlayers)
 {
     playersConnected=0;
     nPlayersWithName=0;
+    numberOfGuesses=0;
     playersNumber=nPlayers;
     QList<QHostAddress> ipAddressesList = QNetworkInterface::allAddresses();
     // use the first non-localhost IPv4 address
@@ -46,6 +47,7 @@ void BasketServer::acceptConnection()
         connect(player->socket, SIGNAL(readyRead()),
                 player, SLOT(messageReceived()));
         connect (player,SIGNAL(nameChosen(int, QString)), this,SLOT(getNameChosen(int, QString)) );
+        connect (player,SIGNAL(guessMade(int)),this,SLOT(getGuess(int)));
         sendMessage(QString(indexConst)+QString(",")+QString::number(playersConnected),player->socket);
         playersConnected++;
         emit sendLog("Jogador "+QString::number(playersConnected)+ " conectado.");
@@ -63,10 +65,26 @@ void BasketServer::startGame()
 }
 void BasketServer::sendPlayersResult()
 {}
-void BasketServer::getPlayersMoves()
-{
 
+void BasketServer::getGuess(int index)
+{
+    emit sendLog("Jogador "+QString::number(index+1)+" deu seu palpite");
+    numberOfGuesses++;
+    if(numberOfGuesses==playersNumber)
+    {
+        QString message=moveConst;
+        for (int i=0;i<playersNumber;i++){
+            message= message + ","+QString::number(playersList.at(i)->hand);
+            message= message + ","+QString::number(playersList.at(i)->guess);
+        }
+        for (int i=0;i<playersNumber;i++)
+        {
+          sendMessage(message,playersList.at(i)->socket);
+        }
+        numberOfGuesses=0;
+    }
 }
+
 void BasketServer::sendMessage(QString message,QTcpSocket* tcpSocket)
 {
 
