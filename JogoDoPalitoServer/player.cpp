@@ -3,6 +3,7 @@
 Player::Player()
 {
     blockSize = 0;
+    alreadyPlayed=0;
 }
 void Player::updateMoves()
 {
@@ -34,9 +35,13 @@ void Player::parseMessage(QString message)
     list = message.split(separator);
     if(message.contains(moveConst))
     {
-        hand=list.at(1).toInt();
-        guess=list.at(2).toInt();
-        emit guessMade(index);
+        if (alreadyPlayed==0)
+        {
+            hand=list.at(1).toInt();
+            guess=list.at(2).toInt();
+            alreadyPlayed=1;
+            emit guessMade(index);
+         }
 
      }else if (message.contains(nameConst))
      {

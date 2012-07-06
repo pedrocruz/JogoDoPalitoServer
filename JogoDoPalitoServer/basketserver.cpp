@@ -31,9 +31,10 @@ void BasketServer::setUpServer(int nPlayers)
 
     connect(&server, SIGNAL(newConnection()),
         this, SLOT(acceptConnection()));
-    server.listen();
-    port=server.serverPort();
-    emit sendLog("Servidor iniciado.");
+    if(server.listen()){
+        port=server.serverPort();
+        emit sendLog("Servidor iniciado.");
+       }
 }
 
 void BasketServer::acceptConnection()
@@ -68,8 +69,10 @@ void BasketServer::sendPlayersResult()
 
 void BasketServer::getGuess(int index)
 {
-    emit sendLog("Jogador "+QString::number(index+1)+" deu seu palpite");
+    emit sendLog("Jogador "+QString::number(index+1)+" deu seu palpite.");
     numberOfGuesses++;
+
+    // When all player already taked a guess
     if(numberOfGuesses==playersNumber)
     {
         QString message=moveConst;
@@ -80,8 +83,11 @@ void BasketServer::getGuess(int index)
         for (int i=0;i<playersNumber;i++)
         {
           sendMessage(message,playersList.at(i)->socket);
+          playersList.at(i)->alreadyPlayed=0;
+
         }
         numberOfGuesses=0;
+        emit sendLog("Novo turno.");
     }
 }
 
@@ -101,7 +107,7 @@ void BasketServer::sendMessage(QString message,QTcpSocket* tcpSocket)
 
 }
  void BasketServer::getNameChosen(int index, QString name){
-     emit sendLog("Jogador "+QString::number(index+1)+" escolheu o nome "+name);
+     emit sendLog("Jogador "+QString::number(index+1)+" escolheu o nome "+name+".");
      nPlayersWithName++;
      if(nPlayersWithName==playersNumber)
      {

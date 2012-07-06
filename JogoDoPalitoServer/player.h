@@ -22,6 +22,7 @@ public:
     int turn;
     int hand;
     int guess;
+    int alreadyPlayed;
     qint16 blockSize;
     void parseMessage(QString message);
 signals:
