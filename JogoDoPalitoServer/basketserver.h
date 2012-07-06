@@ -10,6 +10,7 @@
 #include <QNetworkInterface>
 #include <player.h>
 #include<QString>
+#include <iostream>
 
 
 class BasketServer :public QObject
@@ -20,6 +21,7 @@ public:
     ~BasketServer();
 
     int playersNumber;
+    int nPlayersWithName;
     int playersConnected;
     QTcpServer server;
     QList<Player*> playersList;
@@ -33,6 +35,7 @@ signals:
     void sendLog(QString log);
 
 private slots:
+    void getNameChosen(int index, QString name);
     void sendPlayersResult();
     void getPlayersMoves();
     void acceptConnection();

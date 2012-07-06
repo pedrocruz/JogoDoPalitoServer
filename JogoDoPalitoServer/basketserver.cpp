@@ -13,6 +13,7 @@ BasketServer::~BasketServer()
 void BasketServer::setUpServer(int nPlayers)
 {
     playersConnected=0;
+    nPlayersWithName=0;
     playersNumber=nPlayers;
     QList<QHostAddress> ipAddressesList = QNetworkInterface::allAddresses();
     // use the first non-localhost IPv4 address
@@ -31,7 +32,7 @@ void BasketServer::setUpServer(int nPlayers)
         this, SLOT(acceptConnection()));
     server.listen();
     port=server.serverPort();
-    emit sendLog("Servidor Iniciado");
+    emit sendLog("Servidor iniciado.");
 }
 
 void BasketServer::acceptConnection()
@@ -40,16 +41,19 @@ void BasketServer::acceptConnection()
     player->socket=server.nextPendingConnection();
     if (playersConnected < playersNumber)
     {
+        player->index=playersConnected;
         playersList.append(player);
         connect(player->socket, SIGNAL(readyRead()),
-         player, SLOT(updateMoves()));
+                player, SLOT(messageReceived()));
+        connect (player,SIGNAL(nameChosen(int, QString)), this,SLOT(getNameChosen(int, QString)) );
         sendMessage(QString(indexConst)+QString(",")+QString::number(playersConnected),player->socket);
         playersConnected++;
-        emit sendLog("Jogador Conectado");
+        emit sendLog("Jogador "+QString::number(playersConnected)+ " conectado.");
 
 
     }else{
         sendMessage("server full",player->socket);
+        emit sendLog("Conexão não permitida. Servidor lotado.");
         delete player;
     }
 }
@@ -78,3 +82,18 @@ void BasketServer::sendMessage(QString message,QTcpSocket* tcpSocket)
     tcpSocket->flush();
 
 }
+ void BasketServer::getNameChosen(int index, QString name){
+     emit sendLog("Jogador "+QString::number(index+1)+" escolheu o nome "+name);
+     nPlayersWithName++;
+     if(nPlayersWithName==playersNumber)
+     {
+         QString message=playersConst;
+         for (int i=0;i<playersNumber;i++){
+             message= message + ","+playersList.at(i)->name;
+         }
+         for (int i=0;i<playersNumber;i++)
+         {
+           sendMessage(message,playersList.at(i)->socket);
+         }
+     }
+ }
